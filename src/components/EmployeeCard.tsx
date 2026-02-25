@@ -1,10 +1,10 @@
-import { ComponentType } from 'react';
+import React from 'react';
 
 interface EmployeeCardProps {
   name: string;
   role: string;
   avatar: string;
-  badgeIcon: ComponentType<{ size?: number; className?: string }>;
+  badgeIcon: React.ComponentType<{ size?: number; className?: string }>;
   statusColors: string[];
 }
 
