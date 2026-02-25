@@ -12,9 +12,9 @@ import {
 } from 'lucide-react';
 
 const navLinks = [
-  { to: '/', icon: Home, label: 'Home' },
+  { to: '/dashboard', icon: Home, label: 'Home', end: true },
   { to: '/my-info', icon: User, label: 'My Info', hasChevron: true },
-  { to: '/people', icon: Users, label: 'People' },
+  { to: '/', icon: Users, label: 'People' },
   { to: '/team-management', icon: Users, label: 'Team Management', hasChevron: true },
   { to: '/project-setup', icon: ClipboardList, label: 'Project Setup', hasChevron: true },
   { to: '/hiring', icon: UserPlus, label: 'Hiring', hasChevron: true },
@@ -47,11 +47,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </button>
         </div>
 
-        <nav className="flex-1 px-3 py-6 space-y-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-white/30">
-          {navLinks.map(({ to, icon: Icon, label, hasChevron }) => (
+        <nav className="flex-1 px-3 py-6 space-y-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-white/30 relative">
+          {navLinks.map(({ to, icon: Icon, label, hasChevron, end }) => (
             <NavLink
               key={to}
               to={to}
+              end={end}
               onClick={onClose}
               className={({ isActive }) =>
                 `flex items-center gap-[10px] px-4 h-[53px] rounded-xl transition-all ${
@@ -62,14 +63,21 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               }
               style={{ fontSize: '14px', fontWeight: 400, lineHeight: '100%', letterSpacing: '-0.02em' }}
             >
-              <Icon size={20} />
-              <span>{label}</span>
-              {hasChevron && <ChevronRight size={20} className="ml-auto text-zinc-400" />}
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <div className="absolute left-0 w-1 h-[30px] bg-white rounded-r-full" />
+                  )}
+                  <Icon size={20} />
+                  <span>{label}</span>
+                  {hasChevron && <ChevronRight size={20} className="ml-auto text-zinc-400" />}
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
 
-        <div className="p-4 border-t border-white/10">
+        <div className="p-4 border-white/10">
           <NavLink
             to="/settings"
             onClick={onClose}

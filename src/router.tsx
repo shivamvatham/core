@@ -8,7 +8,8 @@ export const router = createBrowserRouter([
     path: '/',
     element: <MainLayout />,
     children: [
-      { index: true, element: <Dashboard /> },
+      { index: true, element: <People /> },
+      { path: 'dashboard', element: <Dashboard /> },
       { path: 'my-info', element: <div><h2 className="text-2xl font-bold">My Info</h2></div> },
       { path: 'people', element: <People /> },
       { path: 'team-management', element: <div><h2 className="text-2xl font-bold">Team Management</h2></div> },
