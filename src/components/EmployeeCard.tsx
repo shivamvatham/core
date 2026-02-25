@@ -10,21 +10,21 @@ interface EmployeeCardProps {
 
 export default function EmployeeCard({ name, role, avatar, badgeIcon: BadgeIcon, statusColors }: EmployeeCardProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex flex-col items-center">
-        <div className="relative mb-4">
-          <img src={avatar} alt={name} className="w-20 h-20 rounded-full object-cover" />
-          <div className="absolute bottom-0 right-0 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center border-2 border-white">
-            <BadgeIcon size={14} className="text-white" />
+    <div className="w-full flex justify-center">
+      <div className="w-[248px] h-[267px] rounded-[24px] border border-[#E5E5E4] p-6 flex flex-col items-center gap-[10px]">
+        <div className="relative">
+          <img src={avatar} alt={name} className="w-[100px] h-[100px] rounded-full object-cover" />
+          <div className="absolute bottom-0 right-0 w-8 h-8 bg-[#2A2A2A] rounded-full flex items-center justify-center border-2 border-black">
+            <BadgeIcon size={16} className="text-white" />
           </div>
         </div>
         
-        <h3 className="font-semibold text-gray-900 text-center mb-1">{name}</h3>
-        <p className="text-sm text-gray-500 text-center mb-4">{role}</p>
+        <h3 className="font-medium text-[#9CA3AF] text-center">{name}</h3>
+        <p className="text-sm text-[#D4A574] text-center">{role}</p>
         
-        <div className="flex gap-1.5">
+        <div className="flex gap-2 mt-auto">
           {statusColors.map((color, index) => (
-            <div key={index} className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+            <div key={index} className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
           ))}
         </div>
       </div>

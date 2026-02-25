@@ -15,16 +15,17 @@ const employees = [
 
 export default function People() {
   return (
-    <div className="space-y-6">
+    <div className="max-w-[1066px] mx-auto">
+      <div className="bg-white rounded-[20px] p-6 space-y-6">
       {/* Toolbar */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+      <div className="rounded-xl p-4">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative w-full md:w-96">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
               placeholder="Search by Employee Name or Number"
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 border border-[#E5E5E4] rounded-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           
@@ -51,7 +52,7 @@ export default function People() {
       </div>
 
       {/* Employee Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[10px]">
         {employees.map((employee) => (
           <EmployeeCard
             key={employee.id}
@@ -88,6 +89,7 @@ export default function People() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
