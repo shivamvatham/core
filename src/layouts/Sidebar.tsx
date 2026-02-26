@@ -29,7 +29,6 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
     <>
-      {/* Overlay for mobile */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden" 
@@ -37,7 +36,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         />
       )}
       
-      <aside className={`w-[280px] fixed top-4 left-4 bottom-4 rounded-[20px] text-white flex flex-col shadow-2xl z-50 transition-transform lg:translate-x-0 ${
+      <aside className={`w-[280px] fixed top-4 left-4 bottom-4 rounded-[20px] text-white flex flex-col shadow-2xl z-50 transition-transform ${
         isOpen ? 'translate-x-0' : '-translate-x-[calc(100%+16px)]'
       }`} style={{ background: '#3D3936' }}>
         <div className="flex items-center justify-between h-[92px] px-6 gap-[10px] rounded-t-[16px]">
@@ -53,7 +52,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               key={to}
               to={to}
               end={end}
-              onClick={onClose}
+              onClick={(e) => {
+                if (window.innerWidth < 1024) {
+                  onClose();
+                }
+              }}
               className={({ isActive }) =>
                 `flex items-center gap-[10px] px-4 h-[53px] rounded-xl transition-all ${
                   isActive
@@ -80,7 +83,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="p-4 border-white/10">
           <NavLink
             to="/settings"
-            onClick={onClose}
+            onClick={(e) => {
+              if (window.innerWidth < 1024) {
+                onClose();
+              }
+            }}
             className="flex items-center gap-[10px] px-5 h-[53px] rounded-2xl border border-white/10 hover:border-white/20 transition-colors"
             style={{ fontSize: '14px', fontWeight: 400, lineHeight: '100%', letterSpacing: '-0.02em' }}
           >

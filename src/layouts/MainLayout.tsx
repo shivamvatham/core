@@ -8,9 +8,11 @@ export default function MainLayout() {
 
   return (
     <div className="min-h-screen bg-[#F7F7F7]">
-      <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
+      <Navbar onMenuClick={() => setIsSidebarOpen(true)} isOpen={isSidebarOpen} />
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      <main className="lg:ml-[296px] pt-[110px] pr-4 pb-2 pl-6">
+      <main className={`pt-[110px] pr-4 pb-2 pl-6 transition-all ${
+        isSidebarOpen ? 'lg:ml-[296px]' : ''
+      }`}>
         <Outlet />
       </main>
     </div>

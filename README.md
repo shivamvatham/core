@@ -1,76 +1,79 @@
-# React + TypeScript + Vite
+# CORE - Enterprise Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hey! Thanks for checking out my project. This is a responsive enterprise dashboard I built for the interview assignment.
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Getting this running is pretty straightforward:
 
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open http://localhost:5173 in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## What I Built
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+This is a people management dashboard with:
+- A collapsible sidebar that works differently on mobile vs desktop
+- A people listing page with search and pagination
+- Employee cards with profile pictures and status indicators
+- A navbar with a working clock
+
+## Tech Stack
+
+I went with:
+- **React 18** + **TypeScript** - For type safety and modern React features
+- **Vite** - Super fast dev server, way better than CRA
+- **Tailwind CSS** - Makes responsive design much easier
+- **React Router** - For navigation between pages
+- **Lucide React** - Clean, consistent icons
+
+## Project Structure
+
+I organized it like this:
 ```
-# core
+src/
+├── components/     # Reusable stuff like EmployeeCard
+├── layouts/        # MainLayout, Navbar, Sidebar
+├── pages/          # Actual pages (People, Dashboard, etc.)
+└── router.tsx      # All the routes
+```
+
+## Key Features I Implemented
+
+### Responsive Sidebar
+- **Mobile**: Slides in as an overlay, closes when you tap outside
+- **Desktop**: Pushes the content to the right when open, stays open while navigating
+- The hamburger menu hides on desktop when the sidebar is open (cleaner look)
+
+### People Page
+- **Search**: Type to filter employees by name in real-time
+- **Pagination**: Choose 8, 16, 24, or 50 rows per page
+- **Responsive Grid**: 
+  - Mobile: 2 cards per row
+  - Desktop: Auto-fits as many 248px cards as possible
+- Each card has a gear badge overlay (used the VectorGear.png from assets)
+
+### Little Details
+- Custom scrollbar styling (thin, subtle)
+- Smooth transitions everywhere
+- Active route highlighting in the sidebar
+- Real-time clock in the navbar
+- Status dots with specific colors (#FFC83E, #70D32E, #6194EC, #FB8C3D)
+
+## Design Decisions & Assumptions
+
+### What I Assumed
+1. **Card Size**: Kept it fixed at 248px width as per the design specs
+2. **Gap Spacing**: Used 10px between cards consistently
+3. **Mobile Behavior**: Sidebar should close after navigation on mobile, but stay open on desktop
+4. **Data**: Used mock data since there's no backend (but structured it so it's easy to swap in an API)
+
+### Responsive Breakpoints
+I used Tailwind's defaults:
+- `sm`: 640px (tablet)
+- `md`: 768px
+- `lg`: 1024px (desktop)
+- `xl`: 1280px

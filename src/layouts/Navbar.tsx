@@ -1,5 +1,6 @@
 import { Clock, FileText, Bell, Menu } from 'lucide-react';
 import { useLocation } from 'react-router';
+import { useState, useEffect } from 'react';
 
 const routeLabels: Record<string, string> = {
   '/dashboard': 'Home',
@@ -15,19 +16,37 @@ const routeLabels: Record<string, string> = {
 
 interface NavbarProps {
   onMenuClick: () => void;
+  isOpen: boolean;
 }
 
-export default function Navbar({ onMenuClick }: NavbarProps) {
+export default function Navbar({ onMenuClick, isOpen }: NavbarProps) {
   const location = useLocation();
   const currentLabel = routeLabels[location.pathname] || 'Dashboard';
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit',
+      hour12: false 
+    });
+  };
 
   return (
-    <header className="bg-white h-[80px] fixed top-4 left-4 lg:left-[312px] right-4 rounded-[20px] flex items-center justify-between gap-[10px] px-6">
+    <header className={`bg-white h-18 fixed top-4 right-4 rounded-3xl flex items-center justify-between gap-2.5 px-6 transition-all ${
+      isOpen ? 'lg:left-[312px] left-4' : 'left-4'
+    }`}>
       <div className="flex items-center gap-4">
-        <button className="lg:hidden text-gray-700" onClick={onMenuClick}>
+        <button className={`text-gray-700 ${isOpen ? 'lg:hidden' : ''}`} onClick={onMenuClick}>
           <Menu size={24} />
         </button>
-        <h1 className="font-medium text-[#3D3936]" style={{ fontSize: '18px', lineHeight: '100%', letterSpacing: '-0.02em' }}>{currentLabel}</h1>
+        <h1 className="font-medium text-[#3D3936] text-lg leading-none tracking-tight">{currentLabel}</h1>
       </div>
       
       <div className="flex items-center gap-2 md:gap-3">
@@ -37,7 +56,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
         
         <div className="hidden sm:flex items-center gap-2 px-3 md:px-4 py-2 bg-gray-100 rounded-full text-xs md:text-sm font-medium text-gray-700">
           <Clock size={16} />
-          <span>02:03:02</span>
+          <span>{formatTime(time)}</span>
           <button className="hover:bg-gray-100 rounded-full transition-colors hidden md:block">
           <FileText size={16} className="text-gray-700" />
         </button>
@@ -47,9 +66,11 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
           <Bell size={20} className="text-gray-700" />
         </button>
         
-        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-semibold text-sm">
-          U
-        </div>
+        <img 
+          src="https://i.pravatar.cc/150?img=12" 
+          alt="User" 
+          className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover"
+        />
       </div>
     </header>
   );
