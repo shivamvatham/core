@@ -52,7 +52,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               key={to}
               to={to}
               end={end}
-              onClick={(e) => {
+              onClick={() => {
                 if (window.innerWidth < 1024) {
                   onClose();
                 }
@@ -83,7 +83,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="p-4 border-white/10">
           <NavLink
             to="/settings"
-            onClick={(e) => {
+            onClick={() => {
               if (window.innerWidth < 1024) {
                 onClose();
               }
